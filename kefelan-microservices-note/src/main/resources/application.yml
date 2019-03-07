@@ -1,0 +1,31 @@
+server:
+  port: 8303
+    
+spring:
+  application:
+    name: note
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      #naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    #properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    # url: jdbc:mysql://localhost:3306/mstest
+    # username: leon
+    # password: leon
+    url: jdbc:mysql://34.213.67.47/mstest
+    username: mcb
+    password: mcb
+    #testWhileIdle: true
+    #validationQuery: SELECT 1
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+      hostname: localhost
