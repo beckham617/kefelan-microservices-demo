@@ -2,6 +2,7 @@ package com.kefelan.messaging.kefelanmicroservicesuser.controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class UserController {
 	}
 	
 	@GetMapping()
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<User> findAllUsers(){
 		return  userRepository.findAll();
 	}
@@ -63,4 +65,23 @@ public class UserController {
 		userRepository.deleteById(userId);
 		return userRepository.findById(userId).orElse(null);
 	}
+	
+	
+    @GetMapping("/hello")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String helloUser(){
+        return "hello User";
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String helloAdmin(){
+        return "hello Admin";
+    }
+
+    @GetMapping("/guest")
+    @PreAuthorize("hasRole('ROLE_GUEST')")
+    public String helloGuest(){
+        return "hello Guest";
+    }
 }

@@ -20,7 +20,11 @@ spring:
     password: mcb
     #testWhileIdle: true
     #validationQuery: SELECT 1
-
+  cloud:
+    bus:
+      trace:
+        enabled: true
+        
 eureka:
   client:
     registerWithEureka: true
@@ -30,20 +34,18 @@ eureka:
   instance:
       hostname: localhost
 
-auth-server: http://localhost:8301/auth
 security:
-  basic:
-    enabled: false
   oauth2:
-    client:
-      client-id: demo
-      client-secret: demo
-      access-token-uri: ${auth-server}/oauth/token
-      user-authorization-uri: ${auth-server}/oauth/authorize
-      scope: read, write
     resource:
-      token-info-uri: ${auth-server}/oauth/check_token
-#      user-info-uri: ${auth-server}/user
-proxy:
-  auth:
-    load-balanced: true
+      id: user
+      user-info-uri: http://localhost:8080/auth/user
+      prefer-token-info: false
+
+# Increase the Hystrix timeout to 60s (globally)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

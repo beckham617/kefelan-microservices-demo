@@ -1,4 +1,4 @@
-package com.kefelan.messaging.kefelanmicroservicesnote.config;
+package com.kefelan.messaging.kefelanmicroservicesauth.config;
 
 import java.io.IOException;
 import java.util.Collections;

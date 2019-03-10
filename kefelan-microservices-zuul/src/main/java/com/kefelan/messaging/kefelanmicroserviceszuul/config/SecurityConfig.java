@@ -1,5 +1,6 @@
 package com.kefelan.messaging.kefelanmicroserviceszuul.config;
 
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,8 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableWebSecurity
-@Order(-100)
+//@EnableWebSecurity
+@EnableOAuth2Sso
+@Order(0)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override

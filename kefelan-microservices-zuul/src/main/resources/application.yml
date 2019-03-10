@@ -33,27 +33,38 @@ eureka:
 zuul:
   #Service will  be mapped under the /api URI
   #prefix: /api
+  ignoredServices: '*'
   routes:
     auth:
       path: /auth/**
-      sensitiveHeaders:
+      sensitiveHeaders: 
       url: http://localhost:8301
       serviceId: auth
     user:
       path: /user/**
-      sensitiveHeaders:
+      sensitiveHeaders: 
       url: http://localhost:8302
       serviceId: user
     note:
       path: /note/**
-      sensitiveHeaders:
+      sensitiveHeaders: 
       url: http://localhost:8303
       serviceId: note
   add-proxy-headers: true
-       
   host:
+    connect-timeout-millis: 10000
     socket-timeout-millis: 60000
-    
+        
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8080/auth/oauth/token
+      user-authorization-uri: http://localhost:8080/auth/oauth/authorize
+      client-id: webapp
+    resource:
+      user-info-uri: http://localhost:8080/auth/user
+      prefer-token-info: false
+         
 # Increase the Hystrix timeout to 60s (globally)
 hystrix:
   command:

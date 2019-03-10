@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 	
-	private static String KEFELAN_MICROSERVICES_USER = "user";
+	private static String SERVICE_USER = "user";
 
-	private static String KEFELAN_MICROSERVICES_NOTE = "note";
+	private static String SERVICE_NOTE = "note";
 	
 //	@Autowired
 //	RestTemplate restTemplate;

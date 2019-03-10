@@ -9,7 +9,21 @@ public class Account {
     private String passWord;   
     private String[] roles;     
 
-    public String getId() {
+    
+    public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Account(String id, String userName, String passWord, String[] roles) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.passWord = passWord;
+		this.roles = roles;
+	}
+
+	public String getId() {
         return id;
     }
 

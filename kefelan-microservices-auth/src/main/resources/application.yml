@@ -1,19 +1,39 @@
 server:
   port: 8301
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-
 spring:
   application:
     name: auth
-  data:
-    mongodb:
-      port: 27017
-      database: auth_server
-
+  #data:
+  #  mongodb:
+  #    port: 27017
+  #    database: auth_server
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      #naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    #properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    # url: jdbc:mysql://localhost:3306/mstest
+    # username: leon
+    # password: leon
+    url: jdbc:mysql://34.213.67.47/mstest
+    username: mcb
+    password: mcb
+    #testWhileIdle: true
+    #validationQuery: SELECT 1
+  
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+      hostname: localhost
+      
 security:
   oauth2:
     resource:

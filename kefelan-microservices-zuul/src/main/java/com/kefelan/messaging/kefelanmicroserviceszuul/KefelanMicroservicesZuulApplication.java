@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import com.kefelan.messaging.kefelanmicroserviceszuul.filter.pre.AccessFilter;
 
 @SpringBootApplication
 @EnableZuulProxy
-@EnableOAuth2Sso
+//@EnableOAuth2Sso
+//@EnableResourceServer
 @EnableEurekaClient
 public class KefelanMicroservicesZuulApplication {
 

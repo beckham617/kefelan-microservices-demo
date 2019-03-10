@@ -3,7 +3,13 @@ package com.kefelan.messaging.kefelanmicroservicesnote.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +28,7 @@ import com.kefelan.messaging.kefelanmicroservicesnote.repository.NoteRepository;
 @RequestMapping("/note")
 public class NoteController {
 	
-	private static String KEFELAN_MICROSERVICES_USER = "kefelan-microservices-user";
+	private static String SERVICE_USER = "user";
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -63,6 +69,7 @@ public class NoteController {
 		return noteRepository.findById(noteId).orElse(null);
 	}
 	
+	
 	/**
 	 * **Invoke user service**
 	 * @param userName
@@ -70,10 +77,7 @@ public class NoteController {
 	 */
 	@GetMapping("/user/username/{username}")
 	public User[] findAllUsers(@PathVariable("username") final String userName){
-//		ResponseEntity<List<Integer>> quoteResponse = restTemplate.exchange("http://localhost:8301/user/username/" + userName,
-//				HttpMethod.GET, null, new ParameterizedTypeReference<List<Integer>>() {
-//				});
-		User[] userList = restTemplate.getForObject("http://"+KEFELAN_MICROSERVICES_USER+"/user/username/{nameName}", User[].class, userName);
+		User[] userList = restTemplate.getForObject("http://"+SERVICE_USER+"/user/username/{userName}", User[].class, userName);
 		return userList;
 	}
 	
@@ -89,7 +93,7 @@ public class NoteController {
 //				});
 //		List<Integer> idList = quoteResponse.getBody();
 		
-		User[] userList = restTemplate.getForObject("http://"+KEFELAN_MICROSERVICES_USER+"/user/username/{nameName}", User[].class, userName);
+		User[] userList = restTemplate.getForObject("http://"+SERVICE_USER+"/user/username/{nameName}", User[].class, userName);
 		
 		List<Note> resList = new ArrayList<Note>();
 		for(User user : userList) {
